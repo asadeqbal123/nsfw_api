@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Test</title>
+</head>
+<body>
+    <h1>API Test</h1>
+    <button id="testApiBtn">Test API</button>
+    <pre id="result"></pre>
+
+    <script>
+        document.getElementById('testApiBtn').addEventListener('click', () => {
+            fetch('https://hilallink.pythonanywhere.com/api/image/?search=https://i.postimg.cc/43mh22kt/Anais-Zanotti-Hot-in-Bikini-04-662x882.avif', {
+                method: 'GET', // or 'POST', 'PUT', etc.
+                headers: {
+                    'Content-Type': 'application/json',
+                    // Include any required headers like authorization tokens
+                },
+                // For POST or PUT requests, include the body
+                // body: JSON.stringify({ key: 'value' })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('result').textContent = JSON.stringify(data, null, 2);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('result').textContent = 'Error: ' + error.message;
+            });
+        });
+    </script>
+</body>
+</html>
